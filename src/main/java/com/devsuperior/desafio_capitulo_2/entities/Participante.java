@@ -2,6 +2,8 @@ package com.devsuperior.desafio_capitulo_2.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +14,9 @@ public class Participante {
     private Integer id;
     private String nome;
     private String email;
+
+    @ManyToMany(mappedBy = "participantes")
+    private List<Atividade> atividades = new ArrayList<>();
 
     public Participante() {}
 
@@ -43,6 +48,10 @@ public class Participante {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades.stream().toList();
     }
 
     @Override

@@ -1,12 +1,22 @@
 package com.devsuperior.desafio_capitulo_2.entities;
 
+import jakarta.persistence.*;
+
 import java.time.Instant;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_bloco")
 public class Bloco {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Instant inicio;
     private Instant fim;
+
+    @ManyToOne
+    @JoinColumn(name = "atividade_id")
+    private Atividade atividade;
 
     public Bloco() {}
 
@@ -38,6 +48,10 @@ public class Bloco {
 
     public void setFim(Instant fim) {
         this.fim = fim;
+    }
+
+    public Atividade getAtividade() {
+        return atividade;
     }
 
     @Override

@@ -1,10 +1,19 @@
 package com.devsuperior.desafio_capitulo_2.entities;
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
+import java.util.*;
+
+@Entity
+@Table(name = "tb_categoria")
 public class Categoria {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Atividade> atividades = new ArrayList<>();
 
     public Categoria() {}
 
@@ -27,6 +36,10 @@ public class Categoria {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
     }
 
     @Override
